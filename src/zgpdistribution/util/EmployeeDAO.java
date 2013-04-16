@@ -62,7 +62,29 @@ public class EmployeeDAO {
         try {
             employeeList = new ArrayList<>();
             Statement stat = conn.createStatement();
-            ResultSet rs = stat.executeQuery("select * from employeeinfo");
+            ResultSet rs = stat.executeQuery("SELECT * FROM zgpdistribution.employeeinfo WHERE jobPosition = 'Distribution Manager';");
+            while (rs.next()) {
+                employeeList.add(new Employee(rs.getString("name"), rs.getString("NRC"),
+                        rs.getString("wPhone"), rs.getString("mPhone"), rs.getString("jobPosition"),
+                        rs.getString("dept"), rs.getString("deptMgr"), rs.getString("address"), rs.getString("tsp"),
+                        rs.getString("city"), rs.getString("state"), rs.getString("country"), rs.getString("email"),
+                        rs.getString("team")));
+            }
+            rs.close();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        return employeeList;
+    }
+    
+    public ArrayList<Employee> queryByPosition() {
+        String sql = "select * from employeeinfo";
+        ArrayList<Employee> employeeList = null;
+        try {
+            employeeList = new ArrayList<>();
+            Statement stat = conn.createStatement();
+            ResultSet rs = stat.executeQuery("SELECT * FROM zgpdistribution.employeeinfo WHERE jobPosition = 'Distribution Manager';");
             while (rs.next()) {
                 employeeList.add(new Employee(rs.getString("name"), rs.getString("NRC"),
                         rs.getString("wPhone"), rs.getString("mPhone"), rs.getString("jobPosition"),

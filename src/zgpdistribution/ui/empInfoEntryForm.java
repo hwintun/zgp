@@ -8,12 +8,14 @@ import java.util.ArrayList;
 import zgpdistribution.util.CityDAO;
 import zgpdistribution.util.CountryDAO;
 import zgpdistribution.util.DepartmentDAO;
+import zgpdistribution.util.EmployeeDAO;
 import zgpdistribution.util.PositionDAO;
 import zgpdistribution.util.StateDAO;
 import zgpdistribution.util.TownshipDAO;
 import zgpdistribution.util.oops.City;
 import zgpdistribution.util.oops.Country;
 import zgpdistribution.util.oops.Department;
+import zgpdistribution.util.oops.Employee;
 import zgpdistribution.util.oops.Position;
 import zgpdistribution.util.oops.State;
 import zgpdistribution.util.oops.Township;
@@ -64,6 +66,11 @@ public class empInfoEntryForm extends javax.swing.JFrame {
             ArrayList<Position> positionList = new PositionDAO().queryAll();
             for (Position position : positionList) {
                 jComboBoxPosition.addItem(position.getPosition());
+            }
+            
+            ArrayList<Employee> employeeList = new EmployeeDAO().queryByPosition();
+            for (Employee employee : employeeList) {
+                jComboBoxManager.addItem(employee.getName());
             }
 
         } catch (Exception e) {
@@ -122,6 +129,11 @@ public class empInfoEntryForm extends javax.swing.JFrame {
         jPanelBase.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Employee Information Entry", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Agency FB", 1, 14))); // NOI18N
 
         jButtonSave.setText("Save");
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSaveActionPerformed(evt);
+            }
+        });
 
         jButtonCancel.setText("Cancel");
         jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
@@ -363,6 +375,10 @@ public class empInfoEntryForm extends javax.swing.JFrame {
     private void jTextFieldNRCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNRCActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNRCActionPerformed
+
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSaveActionPerformed
 
     /**
      * @param args the command line arguments
